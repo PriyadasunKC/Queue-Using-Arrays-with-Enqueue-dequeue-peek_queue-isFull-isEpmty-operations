@@ -1,0 +1,149 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 5
+
+int queue_array[SIZE];
+int front = -1;
+int rear = -1;
+
+void enqueue(int);
+void display();
+void dequeue();
+void isFull();
+void isEmpty();
+void peek();
+
+void display()
+{
+    for (int i = front; i <= rear; i++)
+    {
+        printf("%d ", queue_array[i]);
+    }
+}
+
+void enqueue(int value)
+{
+    if (rear == SIZE - 1)
+    {
+        printf("Queus is overflow");
+    }
+    else if (front == -1 && rear == -1)
+    {
+        front++;
+        rear++;
+        queue_array[rear] = value;
+    }
+    else
+    {
+        rear++;
+        queue_array[rear] = value;
+    }
+}
+
+void dequeue()
+{
+    if (front == -1)
+    {
+        printf("Queue is underflow");
+    }
+    else
+    {
+
+        if (front > rear)
+        {
+            printf("Unknown Error");
+        }
+        front++;
+    }
+}
+
+void peek()
+{
+    printf("Peek element : %d", queue_array[front]);
+}
+
+void isFull()
+{
+    if (rear > SIZE - 1)
+    {
+        printf("Queue is full");
+    }
+    else
+    {
+        printf("Queue is not full");
+    }
+}
+
+void isEmpty()
+{
+    if (rear == -1 && front == -1)
+    {
+        printf("Queue is empty!");
+    }
+    else
+    {
+        printf("Queue is not empty");
+    }
+}
+
+int main()
+{
+
+    int choice = 0;
+    int value = 0;
+
+    while (1)
+    {
+
+        printf("\nSelect the operation,\n- Press 1 to Enqueue\n- Press 2 to Dequeue\n- Press 3 to Peek\n- Press 4 to check queue is full\n- Press 5 to check queue is empty\n- Press 6 to Display the queue\n- Press 7 to Exit\nChoose the Operation : ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+        {
+            printf("Enter the value to enqueue : ");
+            scanf("%d", &value);
+            enqueue(value);
+            break;
+        }
+        case 2:
+        {
+            dequeue();
+            break;
+        }
+        case 3:
+        {
+            peek();
+            break;
+        }
+        case 4:
+        {
+            isFull();
+            break;
+        }
+        case 5:
+        {
+            isEmpty();
+            break;
+        }
+        case 6:
+        {
+            display();
+            break;
+        }
+        case 7:
+        {
+            exit(0);
+            break;
+        }
+        default:
+        {
+            printf("Invalid Operation!");
+            break;
+        }
+        }
+    }
+
+    return 0;
+}
